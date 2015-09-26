@@ -2,6 +2,8 @@ FROM debian:jessie
 
 MAINTAINER Arnauld <arnauld.loyer@gmail.com>
 
+ENV UPDATED 2015-09-27
+
 # utf8
 ENV LC_ALL C.UTF-8
 
