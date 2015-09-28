@@ -41,7 +41,7 @@ RUN chsh -s /bin/zsh
 #
 # my dotfiles
 #
-RUN git clone https://github.com/Arnauld/dotfiles.git ~/.dotfiles && \
+RUN git clone --recursive https://github.com/Arnauld/dotfiles.git ~/.dotfiles && \
     chmod +x ~/.dotfiles/setup.sh && \
     ~/.dotfiles/setup.sh
 
