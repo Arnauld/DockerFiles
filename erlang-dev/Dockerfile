@@ -2,7 +2,7 @@ FROM debian:jessie
 
 MAINTAINER Arnauld <arnauld.loyer@gmail.com>
 
-ENV UPDATED 2015-09-27
+ENV UPDATED 2015-09-28 00:51
 
 # utf8
 ENV LC_ALL C.UTF-8
@@ -36,9 +36,7 @@ RUN apt-get -y install \
 #
 # Install Zsh
 #
-RUN git clone git://github.com/robbyrussell/oh-my-zsh.git ~/.oh-my-zsh && \
-    cp ~/.oh-my-zsh/templates/zshrc.zsh-template ~/.zshrc && \
-    chsh -s /bin/zsh
+RUN chsh -s /bin/zsh
 
 #
 # my dotfiles
@@ -60,6 +58,10 @@ RUN apt-get -y install \
       figlet
 
 ENV FIGLET_FONTS /usr/share/figlet/
+
+# RUN cd ${FIGLET_FONTS} && \
+#     wget http://www.figlet.org/fonts/bell.flf && \
+#     ...
 
 ADD http://www.figlet.org/fonts/bell.flf ${FIGLET_FONTS}
 ADD http://www.figlet.org/fonts/big.flf ${FIGLET_FONTS}
@@ -87,7 +89,9 @@ RUN gem install curses && \
 RUN cd /usr/src && \
     git clone https://github.com/Arnauld/tpp.git && \
     cd tpp && \
-    make install
+    make install && \
+    mkdir -p ~/.vim/syntax && \
+    cp contrib/tpp.vim ~/.vim/syntax
 
 #
 # ERLANG & rebar
