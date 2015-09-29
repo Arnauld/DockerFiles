@@ -2,7 +2,7 @@ FROM debian:jessie
 
 MAINTAINER Arnauld <arnauld.loyer@gmail.com>
 
-ENV UPDATED 2015-09-28 00:51
+ENV UPDATED 2015-09-29 07:35
 
 # utf8
 ENV LC_ALL C.UTF-8
@@ -17,6 +17,8 @@ RUN apt-get update
 
 #
 # MISC
+# 
+# vim-nox: vim compiled with support for scripting with Lua, Perl, Python, Ruby, and Tcl but no GUI.
 #
 RUN apt-get -y install \
       build-essential \
@@ -27,7 +29,7 @@ RUN apt-get -y install \
       libssl-dev \
       wget \
       curl \
-      vim \
+      vim-nox \
       tmux \
       colord \
       man \
@@ -37,6 +39,7 @@ RUN apt-get -y install \
 # Install Zsh
 #
 RUN chsh -s /bin/zsh
+ENV SHELL /bin/zsh
 
 #
 # my dotfiles
@@ -109,5 +112,11 @@ RUN wget https://s3.amazonaws.com/rebar3/rebar3 -O /usr/local/bin/rebar3 && \
     mkdir -p $HOME/.config/rebar3/ && \
     echo '{plugins, [rebar3_hex]}.' > $HOME/.config/rebar3/rebar.config && \
     rebar3 update && rebar3 plugins upgrade rebar3_hex
+
+#
+# asciinema
+#
+RUN curl -sL https://asciinema.org/install | sh
+
 
 CMD ["zsh"]
