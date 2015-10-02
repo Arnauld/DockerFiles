@@ -107,6 +107,12 @@ RUN cd /tmp && \
     apt-get -y install esl-erlang && \
     rm erlang-solutions_1.0_all.deb
 
+RUN cd /tmp && \
+    git clone --recursive https://github.com/karlll/kjell.git && \
+    cd kjell && \
+    make && \
+    make install
+
 RUN wget https://s3.amazonaws.com/rebar3/rebar3 -O /usr/local/bin/rebar3 && \
     chmod +x /usr/local/bin/rebar3 && \
     mkdir -p $HOME/.config/rebar3/ && \
